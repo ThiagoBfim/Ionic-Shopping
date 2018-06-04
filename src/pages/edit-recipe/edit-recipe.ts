@@ -1,25 +1,35 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-/**
- * Generated class for the EditRecipePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
 @Component({
   selector: 'page-edit-recipe',
   templateUrl: 'edit-recipe.html',
 })
-export class EditRecipePage {
+export class EditRecipePage implements OnInit {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  mode = 'New';
+  selectOptions = ['Fácil', 'Médio', 'Difícil']
+  recipeForm: FormGroup
+
+  constructor(private navParams: NavParams) { }
+
+  ngOnInit() {
+    this.mode = this.navParams.get('mode');
+    this.initForm();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditRecipePage');
+  onSubmit(){
+
+  }
+
+  private initForm() {
+    this.recipeForm = new FormGroup({
+      'titulo': new FormControl(null, Validators.required),
+      'descricao': new FormControl(null, Validators.required),
+      'dificuldade': new FormControl('Medium', Validators.required)
+    });
   }
 
 }
+
