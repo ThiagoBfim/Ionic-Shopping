@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { ShoppingListPage } from '../pages/shopping-list/shopping-list';
 import { TabsPage } from '../pages/tabs/tabs';
+import { ShoppingListService } from '../service/shopping';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { TabsPage } from '../pages/tabs/tabs';
     RecipesPage,
     RecipePage,
     ShoppingListPage,
-    TabsPage
+    TabsPage,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,8 @@ import { TabsPage } from '../pages/tabs/tabs';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ShoppingListService
   ]
 })
 export class AppModule {}
