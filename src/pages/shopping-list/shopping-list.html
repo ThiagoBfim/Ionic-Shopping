@@ -20,10 +20,16 @@
         <ion-input type="number" name="ingredientQtd" placeholder="4" ngModel required></ion-input>
       </ion-item>
     </ion-list>
-    <button
-    ion-button
-    type="submit"
-    block
-    [disabled]="!f.valid">Adicionar Item</button>
+    <button ion-button type="submit" block [disabled]="!f.valid">Adicionar Item</button>
   </form>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of listItens; let i = index" (ionSwipe)="onRemoveItem(item)">
+      <ion-item>
+        <h3> {{item.name}} ({{item.amount}})</h3>
+      </ion-item>
+      <ion-item-options>
+        <button color="danger" ion-button expandable (click)="onRemoveItem(item)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
