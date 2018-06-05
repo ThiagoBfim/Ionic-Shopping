@@ -5,5 +5,11 @@ Project Using Ionic to learn about hybrid mobile apps
 
 <ul>
   <li>Tabs</li>
-  <li>Toasty</li>
+  <li>Toast</li>
+  <li>Action Sheet</li>
+  <li>Alert</li>
+  <li>Form</li>
+  <li>Validators</li>
+  <li>List</li>
+  <li>Buttons</li>
 </ul>
