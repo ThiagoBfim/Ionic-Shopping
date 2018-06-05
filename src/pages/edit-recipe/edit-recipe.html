@@ -28,14 +28,14 @@
     <button type="button" ion-button clear block (click)="onGerirIngredientes()">
         Gerir Ingredientes
     </button>
-    <ion-list formArrayName="ingredients">
-      <ion-item *ngFor="let igControl of recipeForm.get('ingredients').controls; let i = index"
+    <ion-list formArrayName="ingredientes">
+      <ion-item *ngFor="let igControl of recipeForm.get('ingredientes').controls; let i = index"
       >
         <ion-label floating>Nome</ion-label>
         <ion-input type="text" [formControlName]="i"></ion-input>
       </ion-item>
     </ion-list>
 
-    <button ion-button type="submit" block> {{mode}} Recipe </button>
+    <button ion-button type="submit" block [disabled]="!recipeForm.valid"> {{mode}} Recipe </button>
   </form>
 </ion-content>

@@ -1,25 +1,41 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { EditRecipePage } from './../edit-recipe/edit-recipe';
+import { RecipesService } from './../../service/recipe';
+import { NavController, NavParams } from 'ionic-angular';
+import { Recipe } from './../../models/recipe';
+import { Component, OnInit } from '@angular/core';
+import { ShoppingListService } from '../../service/shopping';
 
-/**
- * Generated class for the RecipePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
 @Component({
   selector: 'page-recipe',
   templateUrl: 'recipe.html',
 })
-export class RecipePage {
+export class RecipePage implements OnInit {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  recipe: Recipe;
+  index: number;
+
+  constructor(public navController: NavController,
+    public navParams: NavParams,
+    public recipesService: RecipesService,
+  public shoppingListService: ShoppingListService ) {
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RecipePage');
+  ngOnInit() {
+    this.recipe = this.navParams.get('recipe');
+    this.index = this.navParams.get('index');
   }
 
+  onAddIngredient() {
+    this.shoppingListService.addItens(this.recipe.ingredients);
+  }
+
+  onDeleteRecipe() {
+    this.recipesService.removeRecipe(this.index);
+    this.navController.popToRoot();
+  }
+
+  onEditRecipe() {
+    this.navController.push(EditRecipePage, {mode: 'Edit', recipe: this.recipe, index: this.index});
+  }
 }

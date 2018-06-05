@@ -23,7 +23,7 @@ export class ShoppingListPage {
   }
 
   onRemoveItem(index: number){
-    this.shoppingListService.removeIten(index);
+    this.shoppingListService.removeItem(index);
     this.loadItens();
   }
 
