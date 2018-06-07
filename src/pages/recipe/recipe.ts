@@ -1,6 +1,6 @@
 import { EditRecipePage } from './../edit-recipe/edit-recipe';
 import { RecipesService } from './../../service/recipe';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Recipe } from './../../models/recipe';
 import { Component, OnInit } from '@angular/core';
 import { ShoppingListService } from '../../service/shopping';
@@ -17,7 +17,8 @@ export class RecipePage implements OnInit {
   constructor(public navController: NavController,
     public navParams: NavParams,
     public recipesService: RecipesService,
-  public shoppingListService: ShoppingListService ) {
+  public shoppingListService: ShoppingListService,
+  private toastCtrl: ToastController ) {
 
   }
 
@@ -28,6 +29,15 @@ export class RecipePage implements OnInit {
 
   onAddIngredient() {
     this.shoppingListService.addItens(this.recipe.ingredients);
+    this.createAndShowToasty("Ingrediente adicionado na lista de compras.");
+  }
+  private createAndShowToasty(mensagem: string) {
+    const toast = this.toastCtrl.create({
+      message: mensagem,
+      duration: 1500,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   onDeleteRecipe() {
@@ -36,6 +46,6 @@ export class RecipePage implements OnInit {
   }
 
   onEditRecipe() {
-    this.navController.push(EditRecipePage, {mode: 'Edit', recipe: this.recipe, index: this.index});
+    this.navController.push(EditRecipePage, {mode: 'Editar', recipe: this.recipe, index: this.index});
   }
 }

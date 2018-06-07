@@ -10,7 +10,7 @@ import { Recipe } from '../../models/recipe';
 })
 export class EditRecipePage implements OnInit {
 
-  mode = 'New';
+  mode = 'Nova';
   selectOptions = ['Fácil', 'Médio', 'Difícil']
   recipeForm: FormGroup
   recipe: Recipe;
@@ -25,7 +25,7 @@ export class EditRecipePage implements OnInit {
 
   ngOnInit() {
     this.mode = this.navParams.get('mode');
-    if (this.mode == 'Edit') {
+    if (this.mode == 'Editar') {
       this.recipe = this.navParams.get('recipe');
       this.index = this.navParams.get('index');
     }
