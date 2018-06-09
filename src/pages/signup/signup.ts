@@ -1,7 +1,6 @@
 import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { AuthService } from '../../service/auth';
 
 @Component({
   selector: 'page-signup',
@@ -9,9 +8,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SignupPage {
 
+  constructor(private authService: AuthService) {
 
-  onSingup(form: NgForm){
+  }
 
+  onSingup(form: NgForm) {
+    this.authService.singup(form.value.email, form.value.password)
+    .then(
+      data => console.log(data)
+    ).catch(error => console.log(error));
   }
 
 }
