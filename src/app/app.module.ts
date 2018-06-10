@@ -15,6 +15,7 @@ import { ShoppingListService } from '../service/shopping';
 import { RecipesService } from '../service/recipe';
 import { SignupPage } from '../pages/signup/signup';
 import { AuthService } from '../service/auth';
+import { SLOptionsPage } from '../pages/shopping-list/sl-options/sl-options';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthService } from '../service/auth';
     ShoppingListPage,
     TabsPage,
     SignupPage,
-    SigninPage
+    SigninPage,
+    SLOptionsPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { AuthService } from '../service/auth';
     ShoppingListPage,
     TabsPage,
     SignupPage,
-    SigninPage
+    SigninPage,
+    SLOptionsPage
   ],
   providers: [
     StatusBar,
