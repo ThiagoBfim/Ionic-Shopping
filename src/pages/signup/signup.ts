@@ -1,6 +1,7 @@
 import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
 import { AuthService } from '../../service/auth';
+import { LoadingController, AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-signup',
@@ -8,15 +9,30 @@ import { AuthService } from '../../service/auth';
 })
 export class SignupPage {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+    private loadingController: LoadingController,
+    private alertController:AlertController) {
 
   }
 
   onSingup(form: NgForm) {
+    const loading = this.loadingController.create({
+      content: 'Cadastrando...'
+    });
     this.authService.singup(form.value.email, form.value.password)
-    .then(
-      data => console.log(data)
-    ).catch(error => console.log(error));
+      .then(data => {
+        loading.dismiss();
+      }
+      ).catch(error => {
+        loading.dismiss();
+        const alert = this.alertController.create({
+          title:"Cadastro falhou!",
+          message: error.message,
+          buttons: ['ok']
+        });
+        alert.present();
+      });
+
   }
 
 }

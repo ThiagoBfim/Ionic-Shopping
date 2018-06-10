@@ -1,11 +1,15 @@
 import firebase from 'firebase';
 
 export class AuthService {
-  singup(email: string, password:string){
-   return firebase.auth().createUserWithEmailAndPassword(email, password);
+  singup(email: string, password: string) {
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
   }
 
-  singin(){
+  singin(email: string, password: string) {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  }
 
+  logout() {
+    firebase.auth().signOut();
   }
 }
