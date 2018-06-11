@@ -24,7 +24,11 @@ export class MyApp {
     private authService: AuthService) {
     firebase.initializeApp({
       apiKey: "AIzaSyD8afpQxmj0SRvzrl7q0zjWVal_2VyJUwQ",
-      authDomain: "ionic-livroreceitas.firebaseapp.com"
+      authDomain: "ionic-livroreceitas.firebaseapp.com",
+      databaseURL: "https://ionic-livroreceitas.firebaseio.com",
+      projectId: "ionic-livroreceitas",
+      storageBucket: "ionic-livroreceitas.appspot.com",
+      messagingSenderId: "457385897360"
     });
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
