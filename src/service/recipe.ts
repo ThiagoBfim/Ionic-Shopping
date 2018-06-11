@@ -47,7 +47,13 @@ export class RecipesService {
     return this.http
       .get('https://ionic-livroreceitas.firebaseio.com/' + userId + '/recipe-list.json?auth=' + token)
       .map((response: Response) => {
-        return response.json();
+        const recipelist: Recipe[] = response.json ? response.json() : [];
+        recipelist.forEach( recipe => {
+          if(!recipe.hasOwnProperty('ingredients')){
+            recipe.ingredients = [];
+          }
+        })
+        return recipelist;
       }).do((recipes: Recipe[]) => {
         if (recipes) {
           this.recipes = recipes;
