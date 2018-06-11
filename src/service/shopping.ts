@@ -9,7 +9,7 @@ export class ShoppingListService {
 
   private ingredients: Ingredient[] = [];
 
-  constructor(private http: Http, private authService: AuthService){}
+  constructor(private http: Http, private authService: AuthService) { }
 
   addItem(name: string, amount: number) {
     this.addIngredient(new Ingredient(name, amount));
@@ -17,7 +17,7 @@ export class ShoppingListService {
 
   addItens(itens: Ingredient[]) {
     itens.forEach(element => {
-     this.addIngredient(element);
+      this.addIngredient(element);
     });
     // this.ingredients.push(...itens);
   }
@@ -33,34 +33,38 @@ export class ShoppingListService {
   storeList(token: string) {
     const userId = this.authService.getActiveUser().uid;
     return this.http
-    .put('https://ionic-livroreceitas.firebaseio.com/' + userId + '/shopping-list.json?auth=' + token, this.ingredients)
-    .map((response: Response) => {
-      return response.json();
-    });
+      .put('https://ionic-livroreceitas.firebaseio.com/' + userId + '/shopping-list.json?auth=' + token, this.ingredients)
+      .map((response: Response) => {
+        return response.json();
+      });
   }
 
   fetchList(token: string) {
     const userId = this.authService.getActiveUser().uid;
     return this.http
-    .get('https://ionic-livroreceitas.firebaseio.com/' + userId + '/shopping-list.json?auth=' + token)
-    .map((response: Response) => {
-      return response.json();
-    }).do((data) => {
-      this.ingredients = data;
-    });
+      .get('https://ionic-livroreceitas.firebaseio.com/' + userId + '/shopping-list.json?auth=' + token)
+      .map((response: Response) => {
+        return response.json();
+      }).do((ingredients: Ingredient[]) => {
+        if (ingredients) {
+          this.ingredients = ingredients;
+        } else {
+          this.ingredients = [];
+        }
+      });
   }
 
   private addIngredient(element: Ingredient) {
     var naoPossuiElemento = true;
-      this.ingredients.forEach(f => {
-        if (f.name == element.name) {
-          f.amount = Number(f.amount) + Number(element.amount);
-          naoPossuiElemento = false;
-        }
-      });
-      if(naoPossuiElemento) {
-        this.ingredients.push(element);
+    this.ingredients.forEach(f => {
+      if (f.name == element.name) {
+        f.amount = Number(f.amount) + Number(element.amount);
+        naoPossuiElemento = false;
       }
+    });
+    if (naoPossuiElemento) {
+      this.ingredients.push(element);
+    }
   }
 
 }

@@ -23,7 +23,7 @@ import { ViewController } from "ionic-angular";
     </ion-grid>
   `
 })
-export class SLOptionsPage {
+export class DataBaseOptionsPage {
 
   constructor(private viewCtrl: ViewController) { }
 

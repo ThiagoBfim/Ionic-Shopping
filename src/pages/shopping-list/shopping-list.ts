@@ -4,7 +4,8 @@ import { NgForm } from '@angular/forms';
 import { ShoppingListService } from '../../service/shopping';
 import { Ingredient } from '../../models/Ingredient';
 import { PopoverController, LoadingController, AlertController } from 'ionic-angular';
-import { SLOptionsPage } from './sl-options/sl-options';
+import { DataBaseOptionsPage } from '../database-options/database-options';
+
 @Component({
   selector: 'page-shopping-list',
   templateUrl: 'shopping-list.html',
@@ -38,7 +39,7 @@ export class ShoppingListPage {
     const loading = this.loadingController.create({
       content: "Carregando..."
     });
-    const popOver = this.popOverController.create(SLOptionsPage);
+    const popOver = this.popOverController.create(DataBaseOptionsPage);
     popOver.present({
       ev: event
     });
